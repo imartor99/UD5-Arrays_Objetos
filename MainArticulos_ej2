@@ -1,0 +1,27 @@
+public class MainArticulos {
+    public static void main(String[] args) {
+        // Crear tres artículos
+        Articulo articulo1 = new Articulo("A001", "Laptop HP Pavilion 15");
+        articulo1.setPrecioCompra(500.0);
+        articulo1.setPrecioVenta(700.0);
+        articulo1.setStock(10);
+
+        Articulo articulo2 = new Articulo("A002", "Monitor Dell 24");
+        articulo2.setPrecioCompra(150.0);
+        articulo2.setPrecioVenta(250.0);
+        articulo2.setStock(15);
+
+        Articulo articulo3 = new Articulo("A003", "Mouse Logitech MX Master 3");
+        articulo3.setPrecioCompra(70.0);
+        articulo3.setPrecioVenta(120.0);
+        articulo3.setStock(20);
+
+        // Almacenar en un array
+        Articulo[] arrayArticulos = {articulo1, articulo2, articulo3};
+
+        // Mostrar los artículos almacenados
+        for (Articulo articulo : arrayArticulos) {
+            System.out.println(articulo);
+        }
+    }
+}
