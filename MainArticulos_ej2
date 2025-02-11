@@ -17,10 +17,34 @@ public class MainArticulos {
         articulo3.setStock(20);
 
         // Almacenar en un array
-        Articulo[] arrayArticulos = {articulo1, articulo2, articulo3};
+        Articulo[] arrayArticulos = { articulo1, articulo2, articulo3 };
 
         // Mostrar los artículos almacenados
         for (Articulo articulo : arrayArticulos) {
+            System.out.println(articulo);
+        }
+
+
+        // Segunda prueba con el constructor en la asignación
+        Articulo[] arrayArticuloNuevo = new Articulo[3];
+        arrayArticuloNuevo[0] = new Articulo("T001", "Teclado Logitech K860");
+        arrayArticuloNuevo[0].setPrecioCompra(80.0);
+        arrayArticuloNuevo[0].setPrecioVenta(130.0);
+        arrayArticuloNuevo[0].setStock(25);
+
+        arrayArticuloNuevo[1] = new Articulo("M001", "Mouse Razer DeathAdder V2");
+        arrayArticuloNuevo[1].setPrecioCompra(50.0);
+        arrayArticuloNuevo[1].setPrecioVenta(90.0);
+        arrayArticuloNuevo[1].setStock(30);
+
+        arrayArticuloNuevo[2] = new Articulo("C001", "Cámara Web Logitech C920");
+        arrayArticuloNuevo[2].setPrecioCompra(100.0);
+        arrayArticuloNuevo[2].setPrecioVenta(160.0);
+        arrayArticuloNuevo[2].setStock(18);
+        
+        // Mostrar los nuevos artículos almacenados
+        System.out.println("\nSegunda prueba con el constructor en la asignación:");
+        for (Articulo articulo : arrayArticuloNuevo) {
             System.out.println(articulo);
         }
     }
