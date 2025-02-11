@@ -1,0 +1,46 @@
+/* Utiliza la clase Autobus que se utilizó en el ejercicio 4 de la relación 9 para crear un array de cuatro autobuses
+ e introduce los datos de cada uno de ellos mediante un bucle.
+ Muestra a continuación los datos de todos los autobuses utilizando también un bucle. */
+
+import java.util.Scanner;
+
+public class MainAutobuses {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Autobus[] autobuses = new Autobus[4];
+        
+        // Bucle para introducir los datos de los autobuses
+        for (int i = 0; i < autobuses.length; i++) {
+            System.out.println("Introduce los datos del autobús " + (i + 1) + ":");
+            
+            System.out.print("Matrícula: ");
+            String matricula = scanner.nextLine();
+            
+            System.out.print("Modelo: ");
+            String modelo = scanner.nextLine();
+            
+            System.out.print("Potencia (CV): ");
+            double potenciaCV = scanner.nextDouble();
+            
+            System.out.print("Número de plazas: ");
+            int numeroPlazas = scanner.nextInt();
+            scanner.nextLine(); // Consumir la nueva línea
+            
+            // Crear y almacenar el autobús en el array
+            autobuses[i] = new Autobus(matricula, modelo, potenciaCV, numeroPlazas);
+        }
+        
+        // Mostrar los datos de todos los autobuses
+        System.out.println("\nDatos de los autobuses:\n");
+        for (int i = 0; i < autobuses.length; i++) {
+            System.out.println("Autobús " + (i + 1) + ":");
+            System.out.println("Matrícula: " + autobuses[i].getMatricula());
+            System.out.println("Modelo: " + autobuses[i].getModelo());
+            System.out.println("Potencia (CV): " + autobuses[i].getPotenciaCV());
+            System.out.println("Número de plazas: " + autobuses[i].getNumeroPlazas());
+            System.out.println("----------------------");
+        }
+        
+        scanner.close();
+    }
+}
