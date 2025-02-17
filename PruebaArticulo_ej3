@@ -1,0 +1,31 @@
+/* Crea una clase pruebaArticulo, dicha clase tendrá un atributo que será un array de artículos.
+ Tendrá un constructor que recibirá un dato entero que será el tamaño del array. 
+ La clase dispondrá del método almacena que recibirá un artículo y lo insertará en el array, devolverá true si la inserción ha sido correcta, false en caso contrario.
+ Sobrecarga el método toString para que realice la impresión de todos los artículos del array. Hacer el correspondiente programa de prueba */
+
+public class PruebaArticulo {
+    private Articulo[] articulos;
+    private int contador;
+    
+    public PruebaArticulo (int tamaño){
+        articulos = new Articulo[tamaño];
+    }
+
+    public boolean almacena(Articulo articulo) {
+        if (contador < articulos.length) {
+            articulos[contador++] = articulo;
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public String toString() {
+        String cadena="";
+        cadena+="Lista de Articulos: \n";
+        for (int i = 0; i < articulos.length; i++) {
+          cadena+=articulos[i]+ "\n";
+          
+        }
+        return cadena;
+    }
+}
