@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class MainPruebaArticulos {
+       public static void main(String[] args) {
+        Scanner entrada=new Scanner(System.in);
+        Articulo art1=new Articulo("B001", "Disco de Hockey");
+        Articulo art2=new Articulo("B002", "Zapatillas Senderismo");
+        
+        int tamaño=2;
+        
+        
+        PruebaArticulo prueba = new PruebaArticulo(tamaño); 
+
+        prueba.almacena(art1); 
+        prueba.almacena(art2);
+        
+        System.out.println(prueba);
+        
+        entrada.close();
+    }
+}
