@@ -1,0 +1,244 @@
+public class Articulo {
+    private String codigo;
+    private String descripcion;
+    private double precioCompra;
+    private double precioVenta;
+    private int stock;
+
+    /*Constructor
+    public Articulo(String codigo, String descripcion) {
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+    }*/
+
+     // Constructor completo
+     public Articulo(String codigo, String descripcion, double precioCompra, double precioVenta, int stock) {
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+        this.precioCompra = precioCompra;
+        this.precioVenta = precioVenta;
+        this.stock = stock;
+    }
+
+    // Getters
+    public String getCodigo() {
+        return codigo;
+
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public double getPrecioCompra() {
+        return precioCompra;
+    }
+
+    public double getPrecioVenta() {
+        return precioVenta;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    /* Setters
+    public void setPrecioCompra(double precioCompra) {
+        this.precioCompra = precioCompra;
+    }
+
+    public void setPrecioVenta(double precioVenta) {
+        this.precioVenta = precioVenta;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }*/
+
+    // ToString
+    @Override
+    public String toString() {
+        return "Codigo: " + codigo + ", Descripcion: " + descripcion + ", Precio Compra: " + precioCompra + ", Precio Venta: " + precioVenta + ", Stock: " + stock; 
+    }
+}
+
+import java.util.Scanner;
+
+ public class PruebaArticulo {
+     private Articulo[] articulos;
+     private int contador;
+ 
+     public PruebaArticulo(int tamaño) {
+         articulos = new Articulo[tamaño];
+         contador = 0; // Asegurar que comienza en 0
+     }
+ 
+     public boolean almacena(Articulo articulo) {
+         if (contador < articulos.length) {
+             articulos[contador++] = articulo;
+             return true;
+         }
+         return false;
+     }
+ 
+     // Método para entrada automatizada
+     public void entradaAutomatizada() {
+         if (contador + 4 <= articulos.length) {
+             almacena(new Articulo("A001", "Tornillos", 0.50, 1.00, 100));
+             almacena(new Articulo("A002", "Clavos", 0.30, 0.80, 200));
+             almacena(new Articulo("A003", "Martillo", 5.00, 10.00, 50));
+             almacena(new Articulo("A004", "Llave Inglesa", 7.00, 15.00, 30));
+             System.out.println("Se han añadido 4 artículos de prueba.");
+         } else {
+             System.out.println("No hay espacio suficiente para la entrada automatizada.");
+         }
+     }
+ 
+     // Método para listar artículos
+     public void lista() {
+         if (contador == 0) {
+             System.out.println("No hay artículos en el almacén.");
+         } else {
+             for (int i = 0; i < contador; i++) {
+                 System.out.println(articulos[i]);
+             }
+         }
+     }
+ 
+     // Método para dar de alta un nuevo artículo
+     public void alta(Scanner sc) {
+         if (contador >= articulos.length) {
+             System.out.println("No hay espacio en el almacén.");
+             return;
+         }
+ 
+         System.out.print("Código: ");
+         String codigo = sc.next();
+         System.out.print("Descripción: ");
+         sc.nextLine(); // Consumir el salto de línea
+         String descripcion = sc.nextLine();
+         System.out.print("Precio de compra: ");
+         double precioCompra = sc.nextDouble();
+         System.out.print("Precio de venta: ");
+         double precioVenta = sc.nextDouble();
+         System.out.print("Stock inicial: ");
+         int stock = sc.nextInt();
+ 
+         almacena(new Articulo(codigo, descripcion, precioCompra, precioVenta, stock));
+         System.out.println("Artículo añadido con éxito.");
+     }
+ 
+     // Método para dar de baja un artículo
+     public void baja(Scanner sc) {
+         System.out.print("Ingrese el código del artículo a eliminar: ");
+         String codigo = sc.next();
+         for (int i = 0; i < contador; i++) {
+             if (articulos[i].getCodigo().equals(codigo)) {
+                 articulos[i] = articulos[contador - 1]; // Reemplazar con el último
+                 articulos[contador - 1] = null; // Eliminar referencia
+                 contador--;
+                 System.out.println("Artículo eliminado correctamente.");
+                 return;
+             }
+         }
+         System.out.println("Artículo no encontrado.");
+     }
+ 
+     // Método para entrada de mercancía
+     public void entradaMercancia(Scanner sc) {
+         System.out.print("Ingrese el código del artículo: ");
+         String codigo = sc.next();
+         for (int i = 0; i < contador; i++) {
+             if (articulos[i].getCodigo().equals(codigo)) {
+                 System.out.print("Ingrese la cantidad a añadir: ");
+                 int cantidad = sc.nextInt();
+                 articulos[i].setStock(articulos[i].getStock() + cantidad);
+                 System.out.println("Stock actualizado correctamente.");
+                 return;
+             }
+         }
+         System.out.println("Artículo no encontrado.");
+     }
+ 
+     // Método para salida de mercancía
+     public void salidaMercancia(Scanner sc) {
+         System.out.print("Ingrese el código del artículo: ");
+         String codigo = sc.next();
+         for (int i = 0; i < contador; i++) {
+             if (articulos[i].getCodigo().equals(codigo)) {
+                 System.out.print("Ingrese la cantidad a retirar: ");
+                 int cantidad = sc.nextInt();
+                 if (cantidad > articulos[i].getStock()) {
+                     System.out.println("No hay suficiente stock disponible.");
+                 } else {
+                     articulos[i].setStock(articulos[i].getStock() - cantidad);
+                     System.out.println("Stock actualizado correctamente.");
+                 }
+                 return;
+             }
+         }
+         System.out.println("Artículo no encontrado.");
+     }
+
+    @Override
+    public String toString() {
+        String cadena="";
+        cadena+="Lista de Articulos: \n";
+        for (int i = 0; i < contador; i++) {
+          cadena+=articulos[i]+ "\n";
+          
+        }
+        return cadena.toString();
+    }
+}
+
+import java.util.Scanner;
+
+public class GestSimAlm {
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        PruebaArticulo almacen = new PruebaArticulo(100); // Capacidad máxima de 100 artículos
+
+        int opcion;
+        do {
+            System.out.println("\n--- MENÚ DE GESTIÓN DEL ALMACÉN ---");
+            System.out.println("0. Entrada automatizada");
+            System.out.println("1. Listado de artículos");
+            System.out.println("2. Alta de artículo");
+            System.out.println("3. Baja de artículo");
+            System.out.println("4. Entrada de mercancía");
+            System.out.println("5. Salida de mercancía");
+            System.out.println("6. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = entrada.nextInt();
+
+            switch (opcion) {
+                case 0:
+                    almacen.entradaAutomatizada();
+                    break;
+                case 1:
+                    almacen.lista();
+                    break;
+                case 2:
+                    almacen.alta(entrada);
+                    break;
+                case 3:
+                    almacen.baja(entrada);
+                    break;
+                case 4:
+                    almacen.entradaMercancia(entrada);
+                    break;
+                case 5:
+                    almacen.salidaMercancia(entrada);
+                    break;
+                case 6:
+                    System.out.println("Saliendo del programa...");
+                    break;
+                default:
+                    System.out.println("Opción no válida.");
+            }
+        } while (opcion != 6);
+
+        entrada.close();
+    }
+}
