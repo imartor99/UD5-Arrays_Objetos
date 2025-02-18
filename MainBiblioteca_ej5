@@ -1,0 +1,78 @@
+public class Autor {
+    private String nombre;
+    private String nacionalidad;
+
+    public Autor(String nombre, String nacionalidad) {
+        this.nombre = nombre;
+        this.nacionalidad = nacionalidad;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getNacionalidad() {
+        return nacionalidad;
+    }
+
+    @Override
+    public String toString() {
+        return "Autor: " + nombre + " (" + nacionalidad + ")";
+    }
+}
+
+public class Libro {
+    
+    private String codigo;
+    private String titulo;
+    private Autor autor;
+
+    public Libro(String codigo, String titulo, Autor autor) {
+        this.codigo = codigo;
+        this.titulo = titulo;
+        this.autor = autor;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
+
+    @Override
+    public String toString() {
+        return "Libro: [" + codigo + "] " + titulo + " - " + autor.getNombre();
+    }
+}
+
+
+public class MainBiblioteca {
+    public static void main(String[] args) {
+        // Crear autores
+        Autor autor1 = new Autor("Gabriel García Márquez", "Colombiana");
+        Autor autor2 = new Autor("Miguel de Cervantes", "Española");
+
+        // Crear libros
+        Libro libro1 = new Libro("001", "Cien años de soledad", autor1);
+        Libro libro2 = new Libro("002", "El otoño del patriarca", autor1);
+        Libro libro3 = new Libro("003", "Crónica de una muerte anunciada", autor1);
+        Libro libro4 = new Libro("004", "Don Quijote de la Mancha", autor2);
+        Libro libro5 = new Libro("005", "La Galatea", autor2);
+
+        // Mostrar datos
+        System.out.println("Libros en la Biblioteca:");
+        System.out.println(libro1);
+        System.out.println(libro2);
+        System.out.println(libro3);
+        System.out.println(libro4);
+        System.out.println(libro5);
+    }
+}
+
+
