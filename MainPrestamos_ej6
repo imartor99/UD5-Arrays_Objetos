@@ -1,0 +1,150 @@
+public class Autor {
+    private String nombre;
+    private String nacionalidad;
+
+    public Autor(String nombre, String nacionalidad) {
+        this.nombre = nombre;
+        this.nacionalidad = nacionalidad;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getNacionalidad() {
+        return nacionalidad;
+    }
+
+    @Override
+    public String toString() {
+        return "Autor: " + nombre + " (" + nacionalidad + ")";
+    }
+}
+
+public class Libro {
+    
+    private String codigo;
+    private String titulo;
+    private Autor autor;
+
+    public Libro(String codigo, String titulo, Autor autor) {
+        this.codigo = codigo;
+        this.titulo = titulo;
+        this.autor = autor;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
+
+    @Override
+    public String toString() {
+        return "Libro: [" + codigo + "] " + titulo + " - " + autor.getNombre();
+    }
+}
+
+
+import java.time.LocalDate;
+
+public class Prestamos {
+    private static int totalPrestamos = 0; // Contador de préstamos realizados
+
+    private LocalDate fechaPrestamo;
+    private LocalDate fechaDevolucion;
+    private Libro libro;
+    private Cliente cliente;
+
+    public Prestamos(LocalDate fechaPrestamo, LocalDate fechaDevolucion, Libro libro, Cliente cliente) {
+        this.fechaPrestamo = fechaPrestamo;
+        this.fechaDevolucion = fechaDevolucion;
+        this.libro = libro;
+        this.cliente = cliente;
+        totalPrestamos++;
+    }
+
+    public LocalDate getFechaPrestamo() {
+        return fechaPrestamo;
+    }
+
+    public LocalDate getFechaDevolucion() {
+        return fechaDevolucion;
+    }
+
+    public Libro getLibro() {
+        return libro;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public static int getTotalPrestamos() {
+        return totalPrestamos;
+    }
+
+    @Override
+    public String toString() {
+        return "Préstamo: " + libro.getTitulo() + " a " + cliente.getNombre() + 
+               " | Fecha de préstamo: " + fechaPrestamo + 
+               " | Fecha de devolución: " + fechaDevolucion;
+    }
+}
+
+public class Cliente {
+    private String nombre;
+    private String dni;
+
+    public Cliente(String nombre, String dni) {
+        this.nombre = nombre;
+        this.dni = dni;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    @Override
+    public String toString() {
+        return nombre + " (DNI: " + dni + ")";
+    }
+}
+
+import java.time.LocalDate;
+
+public class MainPrestamo {
+    public static void main(String[] args) {
+        // Crear autores
+        Autor autor1 = new Autor("Gabriel García Márquez", "Colombiana");
+        Autor autor2 = new Autor("Miguel de Cervantes", "Española");
+
+        // Crear libros
+        Libro libro1 = new Libro("001", "Cien años de soledad", autor1);
+        Libro libro2 = new Libro("002", "Don Quijote de la Mancha", autor2);
+
+        // Crear clientes
+        Cliente cliente1 = new Cliente("Juan Pérez", "12345678A");
+        Cliente cliente2 = new Cliente("María López", "87654321B");
+
+        // Crear préstamos
+        Prestamos prestamo1 = new Prestamos(LocalDate.now(), LocalDate.now().plusDays(14), libro1, cliente1);
+        Prestamos prestamo2 = new Prestamos(LocalDate.now(), LocalDate.now().plusDays(7), libro2, cliente2);
+
+        // Mostrar información de los préstamos
+        System.out.println(prestamo1);
+        System.out.println();
+        System.out.println(prestamo2);
+        System.out.println("\nTotal de préstamos realizados: " + Prestamos.getTotalPrestamos());
+    }
+}
